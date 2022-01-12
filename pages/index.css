@@ -5,3 +5,9 @@
 @import url(../blocks/header/__image/header__image.css);
 @import url(../blocks/content/content.css);
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__photo/profile__photo.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__info/_name/profile__info_name.css);
+@import url(../blocks/profile/__info/_occupation/profile__info_occupation.css);
+@import url(../blocks/profile/__info/_edit-button/profile__info_edit-button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
