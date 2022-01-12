@@ -2,11 +2,12 @@
   width: 25px;
   height: 25px;
   border: 1px solid #FFF;
-  background-image: url(/images/Edit_button.svg);
+  background-image: url(../../../../images/Edit_button.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
-  align-self: center;
+  align-self: end;
+  box-sizing: border-box;
 }
 
 .profile__info_edit-button:hover {
