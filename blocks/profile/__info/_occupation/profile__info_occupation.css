@@ -11,14 +11,15 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 655px) {
+@media screen and (max-width: 696px) {
   .profile__info_occupation {
     text-align: center;
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 424px) {
   .profile__info_occupation {
+    max-width: 189px;
     font-size: 14px;
     line-height: 17px;
   }

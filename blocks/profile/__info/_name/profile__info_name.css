@@ -11,15 +11,16 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 655px) {
+@media screen and (max-width: 696px) {
   .profile__info_name {
     margin-top: 26px;
     text-align: center;
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 424px) {
   .profile__info_name {
+    max-width: 189px;
     font-size: 27px;
     line-height: 33px;
   }
