@@ -1,0 +1,21 @@
+.popup__container_close-button {
+  width: 32px;
+  height: 32px;
+  position: fixed;
+  bottom: calc(100% + 8px);
+  left: calc(100% + 8px);
+}
+
+.popup__container_close-button:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .popup__container_close-button {
+    width: 20px;
+    height: 20px;
+    bottom: calc(100% + 16px);
+    left: calc(100% + -20px)
+  }
+}

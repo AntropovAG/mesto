@@ -1,4 +1,5 @@
 .profile__info_occupation {
+  max-width: 336px;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -8,6 +9,17 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  grid-column-start: 1;
-  grid-column-end: 3;
+}
+
+@media screen and (max-width: 655px) {
+  .profile__info_occupation {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .profile__info_occupation {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
