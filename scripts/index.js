@@ -3,19 +3,18 @@ let profileOccupation = document.querySelector('.profile__occupation')
 let formElement = document.querySelector('.form');
 let nameInput = document.querySelector('.form__name');
 let jobInput = document.querySelector('.form__occupation');
+let popUp = document.querySelector('.popup');
 
 function openPopUp() {
-  let popUp = document.querySelector('.popup');
   popUp.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
 }
 
-let openButton = document.querySelector('.profile__edit-button')
+let openButton = document.querySelector('.profile__edit-button');
 openButton.addEventListener('click', openPopUp);
 
 function closePopUp() {
-  let popUp = document.querySelector('.popup');
   popUp.classList.remove('popup_opened');
 }
 
