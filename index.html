@@ -18,74 +18,73 @@
       <img class="profile__photo" src="./images/Jacques_Cousteau.jpg" alt="Фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <div class="profile__edit-button"></div>
+        <button class="profile__edit-button" type="button"></button>
         <p class="profile__occupation">Исследователь океана</p>
       </div>
-      <div class="profile__add-button"></div>
+      <button class="profile__add-button" type="button"></div>
     </section>
 
     <section class="elements">
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/Dobmaj.jpg" alt="Домбай">
         <div class="element__subscription">
-          <p class="element__text">Домбай</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Домбай</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/rainbow_cake.jpg" alt="Торт">
         <div class="element__subscription">
-          <p class="element__text">Торт</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Торт</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/rainbow_sand.jpg" alt="Радужный песок">
         <div class="element__subscription">
-          <p class="element__text">Радужный песок</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Радужный песок</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/Karachaevo-cherkessija.jpg" alt="Карачаево-черкессия">
         <div class="element__subscription">
-          <p class="element__text">Карачаево-черкессия</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Карачаево-черкессия</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус">
         <div class="element__subscription">
-          <p class="element__text">Эльбрус</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Эльбрус</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/sun_and_sea.jpg" alt="Море и солнце">
         <div class="element__subscription">
-          <p class="element__text">Море и солнце</p>
-          <div class="element__like-button"></div>
+          <h2 class="element__text">Море и солнце</h2>
+          <button class="element__like-button" type="button"></button>
         </div>
-      </div>
+      </article>
     </section>
-
-    <div class="popup">
-      <div class="popup__container">
-        <form class="form">
-          <label class="form__label">Редактировать профиль</label>
-          <input class="form__name" type="text" name="Имя">
-          <input class="form__occupation" type="text" name="О себе">
-          <button class="form__save-button" type="submit">Сохранить</button>
-        </form>
-        <img class="popup__close-button" src="./images/Close_icon.svg" alt="Кнопка закрытия">
-      </div>
-    </div>
-
   </main>
 
   <footer class="footer">
-    <p class="footer__text">&#169; 2020 Mesto Russia</p>
+    <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
+
+  <div class="popup">
+    <div class="popup__container">
+      <form class="form" name="edit_profile">
+        <h2 class="form__label">Редактировать профиль</h2>
+        <input class="form__input form__input_user_name" type="text" name="user_name">
+        <input class="form__input form__input_user_occupation" type="text" name="user_occupation">
+        <button class="form__save-button" type="submit">Сохранить</button>
+        <button class="popup__close-button" type="button"></button>
+      </form>
+    </div>
+  </div>
 
   <script src="./scripts/index.js"></script>
 </body>

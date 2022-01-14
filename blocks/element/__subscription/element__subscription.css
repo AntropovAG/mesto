@@ -1,5 +1,5 @@
 .element__subscription {
-  height: 100%;
+  min-height: 79px;
   background-color: white;
   border-radius: 0 0 10px 10px;
   display: flex;

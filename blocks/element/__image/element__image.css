@@ -2,9 +2,3 @@
   min-height: 282px;
   border-radius: 10px 10px 0 0;
 }
-
-.element__image:hover {
-  background-color: #C4C4C4;
-  opacity: .6;
-  transition: opacity .3s;
-  }
