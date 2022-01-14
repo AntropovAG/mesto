@@ -1,6 +1,6 @@
 .form__save-button {
   height: 50px;
-  font-family: Inter, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Inter', 'Arial Narrow Bold', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -16,6 +16,7 @@
 
 .form__save-button:hover {
   opacity: .8;
+  transition: opacity .3s;
   cursor: pointer;
 }
 

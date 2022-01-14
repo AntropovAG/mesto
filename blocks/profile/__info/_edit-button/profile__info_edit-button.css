@@ -11,6 +11,7 @@
 
 .profile__info_edit-button:hover {
   opacity: .6;
+  transition: opacity .3s;
   cursor: pointer;
 }
 

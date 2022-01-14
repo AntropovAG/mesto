@@ -4,11 +4,12 @@
   padding: 0 20px 0 0;
   background-image: url(../../../images/Like_button.svg);
   background-size: contain;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 .element__like-button:hover {
   opacity: .5;
+  transition: opacity .3s;
   cursor: pointer;
 }
 
