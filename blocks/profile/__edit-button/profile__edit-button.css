@@ -9,6 +9,7 @@
   background-size: auto;
   box-sizing: border-box;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__edit-button:hover {
