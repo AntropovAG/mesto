@@ -1,9 +1,9 @@
-.profile__info_name {
-  max-width: 294px;
+.profile__occupation {
+  max-width: 336px;
   font-style: normal;
-  font-weight: 500;
-  font-size: 42px;
-  line-height: 1.14;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
   margin: 0;
   padding: 0;
   text-overflow: ellipsis;
@@ -12,16 +12,15 @@
 }
 
 @media screen and (max-width: 696px) {
-  .profile__info_name {
-    margin-top: 26px;
+  .profile__occupation {
     text-align: center;
   }
 }
 
 @media screen and (max-width: 424px) {
-  .profile__info_name {
+  .profile__occupation {
     max-width: 189px;
-    font-size: 27px;
-    line-height: 33px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
