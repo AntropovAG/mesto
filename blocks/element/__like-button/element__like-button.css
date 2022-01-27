@@ -16,6 +16,6 @@
   transition: opacity .3s;
 }
 
-.element__like-button:active {
+/* .element__like-button:active {
   background-image: url(../../../images/Like_button_active.svg);
-}
+} */

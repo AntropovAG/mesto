@@ -16,10 +16,12 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__text/element__text.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/element/__like-button/_active/element__like-button_active.css);
 @import url(../blocks/element/__subscription/element__subscription.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup-animation/popup-animation.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__container/popup__container.css);
