@@ -12,6 +12,10 @@ const jobInput = document.querySelector('.form__input_user_occupation');
 const placeInput = document.querySelector('.form__input_place_name');
 const addressInput = document.querySelector('.form__input_place_address')
 
+//Переменные с попап для картинок
+const popUpViewImage = document.querySelector('#view_image');
+
+
 const openProfileEditButton = document.querySelector('.profile__edit-button');
 const openElementAddButton = document.querySelector('.profile__add-button')
 const closeProfileEditButton = popUpProfileEdit.querySelector('.popup__close-button');
@@ -52,9 +56,14 @@ function openProfileEditPopUp() {
 }
 
 function openElementAddPopUp() {
-popUpElementAdd.classList.add('popup_opened');
-placeInput.value = "";
-addressInput.value = "";
+  popUpElementAdd.classList.add('popup_opened');
+  placeInput.value = "";
+  addressInput.value = "";
+}
+
+function openViewImagePopup() {
+  popUpViewImage.classList.add('popup-image_opened');
+  // popUpViewImage.querySelector('.popup-image__image').src =
 }
 
 function closeProfileEditPopUp() {
@@ -80,13 +89,26 @@ function placeAddFormSubmit (evt) {
 
 function addElement(name, link) {
   const elementTemplate = document.querySelector('#element_template').content;
-  const Element = elementTemplate.querySelector('.element').cloneNode(true);
-  Element.querySelector('.element__text').textContent = name;
-  Element.querySelector('.element__image').src = link;
-  Element.querySelector('.element__like-button').addEventListener('click', function(evt){
+  const element = elementTemplate.querySelector('.element').cloneNode(true);
+  element.querySelector('.element__text').textContent = name;
+  element.querySelector('.element__image').src = link;
+  element.querySelector('.element__image').alt = name;
+  element.querySelector('.element__like-button').addEventListener('click', function(evt){
     evt.target.classList.toggle('element__like-button_active')});
+  const elementDeleteButton = element.querySelector('.element__delete-icon');
+  elementDeleteButton.addEventListener('click', function() {
+    const currentElement = elementDeleteButton.closest('.element');
+    currentElement.remove();
+  })
+  element.querySelector('.element__image').addEventListener('click', function(){
+    popUpViewImage.classList.add('popup-image_opened');
+    popUpViewImage.querySelector('.popup-image__image').src = element.querySelector('.element__image').src;
+    popUpViewImage.querySelector('.popup-image__caption').textContent = element.querySelector('.element__text').textContent;
+  })
+  popUpViewImage.querySelector('.popup-image__close-button').addEventListener('click', function(){
+    popUpViewImage.classList.remove('popup-image_opened')});
 
-  elementsContainer.prepend(Element);
+  elementsContainer.prepend(element);
 }
 
 initialCards.forEach((value) => {
@@ -99,4 +121,5 @@ closeProfileEditButton.addEventListener('click', closeProfileEditPopUp);
 closeElementAddButton.addEventListener('click', closeElementAddPopUp);
 profileEditForm.addEventListener('submit', profileFormSubmit);
 popUpElementAdd.addEventListener('submit', placeAddFormSubmit);
+
 
