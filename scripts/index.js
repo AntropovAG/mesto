@@ -54,7 +54,6 @@ const initialCards = [
   }
 ];
 
-
 //Функции
 //1. Открытие попапов
 function openProfileEditPopUp() {
@@ -69,8 +68,10 @@ function openElementAddPopUp() {
   addressInput.value = "";
 };
 
-function openViewImagePopup() {
+function openImage (evt){
   popUpViewImage.classList.add('popup-image_opened');
+  popUpImage.src = evt.target.src;
+  popUpImageCaption.textContent = evt.target.parentElement.querySelector('.element__text').textContent;
 };
 
 //2. Закрытие попапов
@@ -83,18 +84,18 @@ function closeElementAddPopUp() {
 };
 
 function closePopOpViewImage(){
-  popUpViewImage.classList.remove('popup-image_opened')
+  popUpViewImage.classList.remove('popup-image_opened');
 };
 
 //3. Отправка через формы
-function profileFormSubmit (evt) {
+function submitProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileOccupation.textContent =  jobInput.value;
   closeProfileEditPopUp();
 };
 
-function placeAddFormSubmit (evt) {
+function submitPlaceAddForm (evt) {
   evt.preventDefault();
   addElement(placeInput.value, addressInput.value);
   closeElementAddPopUp();
@@ -122,11 +123,7 @@ function addElement(name, link) {
   elementImage.alt = name;
   elementLikeButton.addEventListener('click', toggleLike);
   elementDeleteButton.addEventListener('click', elementDelete);
-  elementImage.addEventListener('click', function(){
-    popUpViewImage.classList.add('popup-image_opened');
-    popUpImage.src = elementImage.src;
-    popUpImageCaption.textContent = elementText.textContent;
-  })
+  elementImage.addEventListener('click', openImage)
 
   elementsContainer.prepend(element);
 }
@@ -147,7 +144,7 @@ closeElementAddButton.addEventListener('click', closeElementAddPopUp);
 closePopOpViewImageButton.addEventListener('click', closePopOpViewImage);
 
 //3. Отправка
-profileEditForm.addEventListener('submit', profileFormSubmit);
-popUpElementAdd.addEventListener('submit', placeAddFormSubmit);
+profileEditForm.addEventListener('submit', submitProfileForm);
+popUpElementAdd.addEventListener('submit', submitPlaceAddForm);
 
 
