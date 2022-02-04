@@ -10,7 +10,7 @@
   background-color: #000;
   border-radius: 2px;
   border-color: #000;
-  margin: 48px 0 37px 0;
+  margin: 13px 0 37px 0;
   box-sizing: border-box;
   padding: 0;
 }
@@ -26,6 +26,6 @@
     font-size: 14px;
     line-height: 17px;
     height: 46px;
-    margin: 45px 0 25px 0;
+    margin: 10px 0 25px 0;
   }
 }

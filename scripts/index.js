@@ -1,15 +1,15 @@
 // Переменные для формы с профилем
 const popUpProfileEdit = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = popUpProfileEdit.querySelector('.form');
-const nameInput = profileEditForm.querySelector('.form__input_user_name');
-const jobInput = profileEditForm.querySelector('.form__input_user_occupation');
+const nameInput = profileEditForm.querySelector('#user_name-input');
+const jobInput = profileEditForm.querySelector('#user_occupation-input');
 const closeProfileEditButton = popUpProfileEdit.querySelector('.popup__close-button');
 
 //Переменные для формы с местом
 const popUpElementAdd = document.querySelector('.popup_type_element-add');
 const placeAddForm = popUpElementAdd.querySelector('.form');
-const placeInput = placeAddForm.querySelector('.form__input_place_name');
-const addressInput = placeAddForm.querySelector('.form__input_place_address')
+const placeInput = placeAddForm.querySelector('#place_name-input');
+const addressInput = placeAddForm.querySelector('#place_address-input')
 const closeElementAddButton = popUpElementAdd.querySelector('.popup__close-button');
 
 //Переменные с попап для картинок
@@ -30,18 +30,21 @@ const elementTemplate = document.querySelector('#element_template').content.quer
 //1. Открытие попапов
 function openPopUp (popup) {
   popup.classList.add('popup_opened');
+  window.addEventListener('keydown', closePopUpOnEscKey);
 };
 
 function openProfileEditPopUp() {
   openPopUp(popUpProfileEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
+  enableValidation(popUpProfileEdit);
 };
 
 function openElementAddPopUp() {
   openPopUp(popUpElementAdd);
   placeInput.value = "";
   addressInput.value = "";
+  enableValidation(popUpElementAdd);
 };
 
 function openImage (evt){
@@ -84,6 +87,7 @@ function closeActivePopUps () {
 function closePopUpOnEscKey (evt){
   if (evt.key === 'Escape') {
     closeActivePopUps();
+    window.removeEventListener('keydown', closePopUpOnEscKey);
 }}
 
 //3. Отправка через формы
@@ -148,14 +152,10 @@ closeProfileEditButton.addEventListener('click', closeProfileEditPopUp);
 closeElementAddButton.addEventListener('click', closeElementAddPopUp);
 closePopUpViewImageButton.addEventListener('click', closePopUpViewImage);
 
-//2.2 по клику вне поля
-
-popUpProfileEdit.addEventListener('click', closePopUpOnClick);
-popUpElementAdd.addEventListener('click', closePopUpOnClick);
-popUpViewImage.addEventListener('click', closePopUpOnClick);
-
-//2.3 по нажатию Escape
-window.addEventListener('keydown', closePopUpOnEscKey);
+//2.2 по нажатию вне поля
+popUpProfileEdit.addEventListener('mousedown', closePopUpOnClick);
+popUpElementAdd.addEventListener('mousedown', closePopUpOnClick);
+popUpViewImage.addEventListener('mousedown', closePopUpOnClick);
 
 //3. Отправка
 profileEditForm.addEventListener('submit', submitProfileForm);
