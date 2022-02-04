@@ -14,7 +14,7 @@ const closeElementAddButton = popUpElementAdd.querySelector('.popup__close-butto
 
 //Переменные с попап для картинок
 const popUpViewImage = document.querySelector('.popup_type_view-image');
-const closePopOpViewImageButton = popUpViewImage.querySelector('.popup__close-button');
+const closePopUpViewImageButton = popUpViewImage.querySelector('.popup__close-button');
 const popUpImage = popUpViewImage.querySelector('.popup__image');
 const popUpImageCaption = popUpViewImage.querySelector('.popup__caption');
 
@@ -63,9 +63,28 @@ function closeElementAddPopUp() {
   closePopUp(popUpElementAdd);
 };
 
-function closePopOpViewImage() {
+function closePopUpViewImage() {
   closePopUp(popUpViewImage);
 };
+
+function closePopUpOnClick (evt){
+  if (evt.target === evt.currentTarget) {
+    closePopUp(evt.target)
+  }
+}
+
+function closeActivePopUps () {
+  const popUpArray = Array.from(document.querySelectorAll('.popup'));
+  popUpArray.forEach((item) => {
+  if (item.matches('.popup_opened')) {
+    closePopUp(item)
+  }
+})}
+
+function closePopUpOnEscKey (evt){
+  if (evt.key === 'Escape') {
+    closeActivePopUps();
+}}
 
 //3. Отправка через формы
 function submitProfileForm (evt) {
@@ -118,15 +137,25 @@ initialCards.forEach((value) => {
   renderCard(value.name, value.link);
 });
 
-//Кнопки/слушатели
+//Кнопки/Слушатели
 //1. Открытие
 openProfileEditButton.addEventListener('click', openProfileEditPopUp);
 openElementAddButton.addEventListener('click', openElementAddPopUp);
 
-//2. Закрытие
+//2. Закрытие:
+//2.1 по кнопке
 closeProfileEditButton.addEventListener('click', closeProfileEditPopUp);
 closeElementAddButton.addEventListener('click', closeElementAddPopUp);
-closePopOpViewImageButton.addEventListener('click', closePopOpViewImage);
+closePopUpViewImageButton.addEventListener('click', closePopUpViewImage);
+
+//2.2 по клику вне поля
+
+popUpProfileEdit.addEventListener('click', closePopUpOnClick);
+popUpElementAdd.addEventListener('click', closePopUpOnClick);
+popUpViewImage.addEventListener('click', closePopUpOnClick);
+
+//2.3 по нажатию Escape
+window.addEventListener('keydown', closePopUpOnEscKey);
 
 //3. Отправка
 profileEditForm.addEventListener('submit', submitProfileForm);

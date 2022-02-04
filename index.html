@@ -35,10 +35,10 @@
 
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
-      <form class="form" name="edit_profile">
+      <form class="form" name="edit_profile" novalidate>
         <h2 class="form__label">Редактировать профиль</h2>
-        <input class="form__input form__input_user_name" type="text" name="user_name">
-        <input class="form__input form__input_user_occupation" type="text" name="user_occupation">
+        <input class="form__input form__input_user_name" type="text" name="user_name" required minlength="2" maxlength="40">
+        <input class="form__input form__input_user_occupation" type="text" name="user_occupation" required minlength="2" maxlength="200">
         <button class="form__save-button" type="submit">Сохранить</button>
         <button class="popup__close-button" type="button"></button>
       </form>
@@ -47,10 +47,10 @@
 
   <div class="popup popup_type_element-add">
     <div class="popup__container">
-      <form class="form" name="add_place">
+      <form class="form" name="add_place" novalidate>
         <h2 class="form__label">Новое место</h2>
-        <input class="form__input form__input_place_name" type="text" name="place_name" placeholder="Название">
-        <input class="form__input form__input_place_address" type="text" name="place_address" placeholder="Ссылка на картинку">
+        <input class="form__input form__input_place_name" type="text" name="place_name" placeholder="Название" required minlength="2" maxlength="30">
+        <input class="form__input form__input_place_address" type="url" name="place_address" placeholder="Ссылка на картинку" required>
         <button class="form__save-button" type="submit">Сохранить</button>
         <button class="popup__close-button" type="button"></button>
       </form>
@@ -77,5 +77,6 @@
   </template>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
