@@ -27,7 +27,22 @@ const openElementAddButton = document.querySelector('.profile__add-button');
 const elementTemplate = document.querySelector('#element_template').content.querySelector('.element');
 
 //Функции
-//1. Открытие попапов
+//1.Работа с попап
+function closeActivePopUps () {
+  const popUpArray = Array.from(document.querySelectorAll('.popup'));
+  popUpArray.forEach((item) => {
+  if (item.matches('.popup_opened')) {
+    closePopUp(item)
+  }
+})}
+
+function closePopUpOnEscKey (evt){
+  if (evt.key === 'Escape') {
+    closeActivePopUps();
+    window.removeEventListener('keydown', closePopUpOnEscKey);
+}}
+
+//2. Открытие попапов
 function openPopUp (popup) {
   popup.classList.add('popup_opened');
   window.addEventListener('keydown', closePopUpOnEscKey);
@@ -53,7 +68,7 @@ function openImage (evt){
   popUpImageCaption.textContent = evt.target.parentElement.querySelector('.element__text').textContent;
 };
 
-//2. Закрытие попапов
+//3. Закрытие попапов
 function closePopUp (popup) {
   popup.classList.remove('popup_opened');
 };
@@ -76,21 +91,7 @@ function closePopUpOnClick (evt){
   }
 }
 
-function closeActivePopUps () {
-  const popUpArray = Array.from(document.querySelectorAll('.popup'));
-  popUpArray.forEach((item) => {
-  if (item.matches('.popup_opened')) {
-    closePopUp(item)
-  }
-})}
-
-function closePopUpOnEscKey (evt){
-  if (evt.key === 'Escape') {
-    closeActivePopUps();
-    window.removeEventListener('keydown', closePopUpOnEscKey);
-}}
-
-//3. Отправка через формы
+//4. Отправка через формы
 function submitProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -104,17 +105,17 @@ function submitPlaceAddForm (evt) {
   closeElementAddPopUp();
 };
 
-//4. Кнопка "лайк"
+//5. Кнопка "лайк"
 function toggleLike (evt) {
   evt.target.classList.toggle('element__like-button_active')
 };
 
-//5. Удаление элемента
+//6. Удаление элемента
 function elementDelete (evt) {
   evt.target.parentElement.remove();
 };
 
-//6. Создание карточки
+//7. Создание карточки
 function addElement(name, link) {
   const element = elementTemplate.cloneNode(true);
   const elementText = element.querySelector('.element__text');
@@ -131,7 +132,7 @@ function addElement(name, link) {
   return element;
 };
 
-//7. Добавление карточки
+//8. Добавление карточки
 function renderCard(name, link){
   elementsContainer.prepend(addElement(name, link));
 };
