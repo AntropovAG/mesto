@@ -1,15 +1,15 @@
 // Переменные для формы с профилем
 const popUpProfileEdit = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = popUpProfileEdit.querySelector('.form');
-const nameInput = profileEditForm.querySelector('#user_name-input');
-const jobInput = profileEditForm.querySelector('#user_occupation-input');
+const nameInput = profileEditForm.querySelector('#username-input');
+const jobInput = profileEditForm.querySelector('#occupation-input');
 const closeProfileEditButton = popUpProfileEdit.querySelector('.popup__close-button');
 
 //Переменные для формы с местом
 const popUpElementAdd = document.querySelector('.popup_type_element-add');
 const placeAddForm = popUpElementAdd.querySelector('.form');
-const placeInput = placeAddForm.querySelector('#place_name-input');
-const addressInput = placeAddForm.querySelector('#place_address-input')
+const placeInput = placeAddForm.querySelector('#place-input');
+const addressInput = placeAddForm.querySelector('#address-input')
 const closeElementAddButton = popUpElementAdd.querySelector('.popup__close-button');
 
 //Переменные с попап для картинок
