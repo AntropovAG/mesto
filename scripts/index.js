@@ -37,14 +37,14 @@ function openProfileEditPopUp() {
   openPopUp(popUpProfileEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
-  enableValidation(popUpProfileEdit);
+  clearValidationErrorAtOpen(popUpProfileEdit)
 };
 
 function openElementAddPopUp() {
   openPopUp(popUpElementAdd);
   placeInput.value = "";
   addressInput.value = "";
-  enableValidation(popUpElementAdd);
+  clearValidationErrorAtOpen(popUpElementAdd)
 };
 
 function openImage (evt){
