@@ -15,48 +15,54 @@ const addressInput = placeAddForm.querySelector('#address-input')
 //Переменные со страницы
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation')
-const openProfileEditButton = document.querySelector('.profile__edit-button');
-const openElementAddButton = document.querySelector('.profile__add-button');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const elementAddButton = document.querySelector('.profile__add-button');
 const popUpArray = Array.from(document.querySelectorAll('.popup'));
+const templateSelector = '#element_template';
+const elementsContainer = document.querySelector('.elements');
+import {formValidationObject} from './constants.js';
+import {initialCards} from './cards.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 //Функции
 //1. Открытие попапов
 export function openPopUp (popup) {
   popup.classList.add('popup_opened');
-  window.addEventListener('keydown', closePopUpOnEscKey);
+  document.addEventListener('keydown', closePopUpOnEscKey);
 };
 
 function openProfileEditPopUp() {
   openPopUp(popUpProfileEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
-  validateProfileForm._clearValidationErrorAtOpen();
+  validateProfileForm.clearValidationErrorAtOpen();
 };
 
 function openElementAddPopUp() {
   openPopUp(popUpElementAdd);
   placeInput.value = "";
   addressInput.value = "";
-  validatePlaceForm._clearValidationErrorAtOpen();
+  validatePlaceForm.clearValidationErrorAtOpen();
 };
 
 
 //2. Закрытие попапов
 function closePopUp (popup) {
   popup.classList.remove('popup_opened');
-  window.removeEventListener('keydown', closePopUpOnEscKey);
+  document.removeEventListener('keydown', closePopUpOnEscKey);
 };
 
-function closeActivePopUps () {
-  popUpArray.forEach((item) => {
-  if (item.matches('.popup_opened')) {
-    closePopUp(item)
+function closeActivePopUp () {
+const popup = document.querySelector('.popup_opened');
+  if (popup) {
+    closePopUp(popup);
   }
-})}
+}
 
 function closePopUpOnEscKey (evt){
   if (evt.key === 'Escape') {
-    closeActivePopUps();
+    closeActivePopUp();
 }
 }
 
@@ -65,30 +71,30 @@ function submitProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileOccupation.textContent =  jobInput.value;
-  closeActivePopUps();
+  closeActivePopUp();
 };
+
+function addCard (name, link) {
+  const card = new Card(name, link, templateSelector);
+  const cardElement = card.generateCard();
+  elementsContainer.prepend(cardElement);
+}
 
 function submitPlaceAddForm (evt) {
   evt.preventDefault();
-  const card = new Card(placeInput.value, addressInput.value);
-  const cardElement = card.generateCard();
-  document.querySelector('.elements').prepend(cardElement);
-  closeActivePopUps();
+  addCard(placeInput.value, addressInput.value);
+  closeActivePopUp();
 };
 
 //Добавление карточек
-import {Card} from './Card.js';
-
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link);
-  const cardElement = card.generateCard();
-  document.querySelector('.elements').prepend(cardElement);
+  addCard(item.name, item.link)
 });
 
 //Кнопки/Слушатели
 //1. Открытие
-openProfileEditButton.addEventListener('click', openProfileEditPopUp);
-openElementAddButton.addEventListener('click', openElementAddPopUp);
+profileEditButton.addEventListener('click', openProfileEditPopUp);
+elementAddButton.addEventListener('click', openElementAddPopUp);
 
 //2. Закрытие:
 // //2.1 по кнопке и клику вне поля
@@ -109,10 +115,9 @@ profileEditForm.addEventListener('submit', submitProfileForm);
 popUpElementAdd.addEventListener('submit', submitPlaceAddForm);
 
 //Валидация форм
-import {formValidationObject, FormValidator} from './FormValidator.js';
 
-const validateProfileForm = new FormValidator(formValidationObject, profileFormSelector);
+const validateProfileForm = new FormValidator(formValidationObject, profileEditForm);
 validateProfileForm.enableValidation();
 
-const validatePlaceForm = new FormValidator(formValidationObject, profilePlaceSelector);
+const validatePlaceForm = new FormValidator(formValidationObject, placeAddForm);
 validatePlaceForm.enableValidation();
