@@ -2,12 +2,12 @@ const popUpViewImage = document.querySelector('.popup_type_view-image');
 const popUpImage = popUpViewImage.querySelector('.popup__image');
 const popUpImageCaption = popUpViewImage.querySelector('.popup__caption');
 
-import {openPopUp} from "./index.js";
+// import {openPopUp} from "./index.js";
 
 export class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(cardObject, templateSelector) {
+    this._name = cardObject.name;
+    this._link = cardObject.link;
     this._elementSelector = templateSelector;
   }
 
@@ -46,12 +46,12 @@ export class Card {
     this._element = null;
   }
 
-  _openImage() {
-    popUpImage.src = this._link;
-    popUpImage.alt = this._name;
-    popUpImageCaption.textContent = this._name;
-    openPopUp(popUpViewImage)
-  }
+  // _openImage() {
+  //   popUpImage.src = this._link;
+  //   popUpImage.alt = this._name;
+  //   popUpImageCaption.textContent = this._name;
+  //   openPopUp(popUpViewImage)
+  // }
 
 }
 
