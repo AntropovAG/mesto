@@ -38,23 +38,20 @@ const validatePlaceForm = new FormValidator(formValidationObject, placeAddForm);
 validatePlaceForm.enableValidation();
 const userInfo = new UserInfo({ nameSelector: '.profile__name', occupationSelector: '.profile__occupation' })
 
-
-const formPopUp = new PopupWithForm(profileFormSelector, (data) => {
+const profileEditFormPopUp = new PopupWithForm(profileFormSelector, (data) => {
   userInfo.setUserInfo({ name: data['user_name'], occupation: data['user_occupation'] })
 })
 
-formPopUp.setEventListeners();
+profileEditFormPopUp.setEventListeners();
 
-function openPopupProfile() {
-  formPopUp.open();
+function openProfilePopUp() {
   const setUserData = userInfo.getUserInfo();
   nameInput.value = setUserData.name;
   jobInput.value = setUserData.occupation;
   validateProfileForm.clearValidationErrorAtOpen()
+  profileEditFormPopUp.open();
 };
-profileEditButton.addEventListener('click', openPopupProfile)
-
-const imagePopUp = new PopupWithImage(imagePopUpSelector, addressInput, placeInput);
+profileEditButton.addEventListener('click', openProfilePopUp)
 
 
 //Функции
@@ -106,8 +103,16 @@ const imagePopUp = new PopupWithImage(imagePopUpSelector, addressInput, placeInp
 //   profileOccupation.textContent =  jobInput.value;
 // };
 
+const imagePopUp = new PopupWithImage('.popup_type_view-image');
+
+function openImagePopUp(link, name) {
+  imagePopUp.open(link, name)
+}
+
+imagePopUp.setEventListeners();
+
 function createCard (cardObject) {
-  const card = new Card(cardObject, templateSelector);
+  const card = new Card(cardObject, templateSelector, openImagePopUp);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -117,16 +122,30 @@ const section = new Section({items: initialCards, renderer: (item) =>
 
 section.renderItems();
 
-function addCardPrepend (cardElement) {
-  elementsContainer.prepend(cardElement);
-}
+// function addCardPrepend (cardElement) {
+//   elementsContainer.prepend(cardElement);
+// }
 
-function submitPlaceAddForm (evt) {
-  evt.preventDefault();
-  closeActivePopUp();
-  addCardPrepend (createCard({name: placeInput.value, link: addressInput.value}))
+// // function submitPlaceAddForm (evt) {
+// //   evt.preventDefault();
+// //   closeActivePopUp();
+// //   addCardPrepend (createCard({name: placeInput.value, link: addressInput.value}))
+// // };
+
+const placeAddFormPopUp = new PopupWithForm(profilePlaceSelector, (data) => {
+  section.addItem(createCard ({name: data['place_name'], link: data['place_address']})
+)})
+
+placeAddFormPopUp.setEventListeners();
+
+function openElementAddPopUp() {
+  placeInput.value = "";
+  addressInput.value = "";
+  validatePlaceForm.clearValidationErrorAtOpen();
+  placeAddFormPopUp.open();
 };
 
+elementAddButton.addEventListener('click', openElementAddPopUp)
 //Добавление карточек
 // initialCards.forEach((item) => {
 //   addCardPrepend (createCard(item))
@@ -153,7 +172,7 @@ function submitPlaceAddForm (evt) {
 
 //3. Отправка
 // profileEditForm.addEventListener('submit', submitProfileForm);
-popUpElementAdd.addEventListener('submit', submitPlaceAddForm);
+// popUpElementAdd.addEventListener('submit', submitPlaceAddForm);
 
 //Валидация форм
 

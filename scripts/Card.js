@@ -1,14 +1,9 @@
-const popUpViewImage = document.querySelector('.popup_type_view-image');
-const popUpImage = popUpViewImage.querySelector('.popup__image');
-const popUpImageCaption = popUpViewImage.querySelector('.popup__caption');
-
-// import {openPopUp} from "./index.js";
-
 export class Card {
-  constructor(cardObject, templateSelector) {
+  constructor(cardObject, templateSelector, handleCardClick) {
     this._name = cardObject.name;
     this._link = cardObject.link;
     this._elementSelector = templateSelector;
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -34,7 +29,7 @@ export class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {this._toggleLike()});
     this._deleteButton.addEventListener('click', () => {this._deleteElement()});
-    this._cardImage.addEventListener('click', () => {this._openImage()})
+    this._cardImage.addEventListener('click', () => {this._handleCardClick(this._link, this._name)})
   }
 
   _toggleLike() {
@@ -45,13 +40,6 @@ export class Card {
     this._element.remove();
     this._element = null;
   }
-
-  // _openImage() {
-  //   popUpImage.src = this._link;
-  //   popUpImage.alt = this._name;
-  //   popUpImageCaption.textContent = this._name;
-  //   openPopUp(popUpViewImage)
-  // }
 
 }
 
