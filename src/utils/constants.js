@@ -19,8 +19,6 @@ const jobInput = profileEditForm.querySelector('#occupation-input');
 const profilePlaceSelector = '.popup_type_element-add';
 const popUpElementAdd = document.querySelector(profilePlaceSelector);
 const placeAddForm = popUpElementAdd.querySelector('.form');
-const placeInput = placeAddForm.querySelector('#place-input');
-const addressInput = placeAddForm.querySelector('#address-input')
 
 //Переменные со страницы
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -34,8 +32,6 @@ export {profileFormSelector,
         jobInput,
         profilePlaceSelector,
         placeAddForm,
-        placeInput,
-        addressInput,
         profileEditButton,
         elementAddButton,
         templateSelector,

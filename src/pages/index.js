@@ -5,8 +5,6 @@ import {profileFormSelector,
         jobInput,
         profilePlaceSelector,
         placeAddForm,
-        placeInput,
-        addressInput,
         profileEditButton,
         elementAddButton,
         templateSelector,
@@ -75,8 +73,6 @@ const placeAddFormPopUp = new PopupWithForm(profilePlaceSelector, (data) => {
 placeAddFormPopUp.setEventListeners();
 
 function openElementAddPopUp() {
-  placeInput.value = "";
-  addressInput.value = "";
   validatePlaceForm.clearValidationErrorAtOpen();
   placeAddFormPopUp.open();
 };
