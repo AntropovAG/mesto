@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(cardObject, templateSelector, handleCardClick) {
     this._name = cardObject.name;
     this._link = cardObject.link;
@@ -40,6 +40,5 @@ export class Card {
     this._element.remove();
     this._element = null;
   }
-
 }
 
