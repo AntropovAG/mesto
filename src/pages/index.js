@@ -23,6 +23,9 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+//Импорт CSS для сборки
+import './index.css';
+
 //Создание карточек
 function createCard (cardObject) {
   const card = new Card(cardObject, templateSelector, openImagePopUp);

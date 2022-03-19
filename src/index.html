@@ -5,17 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="title" content="Место">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/Header_logo.svg" alt="Лого Место">
+    <img class="header__logo" src="<%=require('./images/Header_logo.svg')%>" alt="Лого Место">
   </header>
 
   <main class="content">
     <section class="profile">
-      <img class="profile__photo" src="./images/Jacques_Cousteau.jpg" alt="Фото профиля">
+      <img class="profile__photo" src="<%=require('./images/Jacques_Cousteau.jpg')%>" alt="Фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
@@ -79,8 +78,6 @@
       <button class="element__delete-icon"></button>
     </article>
   </template>
-
-<script type="module" src="./pages/index.js"></script>
 
 </body>
 </html>
