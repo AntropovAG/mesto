@@ -25,6 +25,8 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const elementAddButton = document.querySelector('.profile__add-button');
 const templateSelector = '#element_template';
 const containerSelector = '.elements';
+const avatarEditButton = document.querySelector('.profile__photo-button');
+const cardDeleteFormSelector = '.popup_type_confirm';
 
 export {profileFormSelector,
         profileEditForm,
@@ -36,4 +38,6 @@ export {profileFormSelector,
         elementAddButton,
         templateSelector,
         containerSelector,
+        avatarEditButton,
+        cardDeleteFormSelector
 }

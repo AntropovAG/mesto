@@ -1,9 +1,15 @@
 export default class Card {
-  constructor(cardObject, templateSelector, handleCardClick) {
+  constructor(cardObject, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick, myId) {
     this._name = cardObject.name;
     this._link = cardObject.link;
+    this._likes = cardObject.likes;
+    this._id = cardObject._id;
+    this._ownerId = cardObject.owner._id;
     this._elementSelector = templateSelector;
-    this._handleCardClick = handleCardClick
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+    this._myId = myId
   }
 
   _getTemplate() {
@@ -22,21 +28,49 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardText.textContent = this._name;
+    this.setLike(this._likes);
+    if(this._ownerId !== this._myId){
+      this._deleteButton.style.display = 'none'
+    }
+
+    if(this.isLiked()){
+      this._likeButton.classList.add('element__like-button_active')
+    }
 
     return this._element;
   }
 
+  isLiked() {
+    const cardHasMyLike = this._likes.find(user => user._id === this._myId)
+    return cardHasMyLike
+  }
+
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {this._toggleLike()});
-    this._deleteButton.addEventListener('click', () => {this._deleteElement()});
+    this._likeButton.addEventListener('click', () => {this._handleLikeClick(this._id)});
+    this._deleteButton.addEventListener('click', () => {this._handleDeleteClick(this._id)});
     this._cardImage.addEventListener('click', () => {this._handleCardClick(this._link, this._name)})
   }
 
-  _toggleLike() {
-    this._likeButton.classList.toggle('element__like-button_active')
+  setLike(likes) {
+    this._likes = likes
+    this._likeCount = this._element.querySelector('.element__like-counter');
+    this._likeCount.textContent = this._likes.length
 
+    if(this.isLiked()) {
+      this.switchLikeOn()} else {
+        this.switchLikeOff()
+      }
   }
-  _deleteElement() {
+
+  switchLikeOn() {
+    this._likeButton.classList.add('element__like-button_active')
+  }
+
+  switchLikeOff() {
+    this._likeButton.classList.remove('element__like-button_active')
+  }
+
+  deleteElement() {
     this._element.remove();
     this._element = null;
   }
