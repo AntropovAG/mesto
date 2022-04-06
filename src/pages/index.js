@@ -43,7 +43,6 @@ function createCard (cardObject, myId) {
            })
             .catch((err) => {
               console.log(err);
-              cardDeleteFormPopUp.changeButtonTextToDefault('Да')
               })
               .finally(() => {
                 setTimeout(() => {cardDeleteFormPopUp.changeButtonTextToDefault('Да')}, 1000)
@@ -93,7 +92,6 @@ function handleProfileEditFormSubmit(data) {
     })
       .catch((err) => {
         console.log(err);
-        placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
       })
         .finally(() => {
           setTimeout(() => {profileEditFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
@@ -123,7 +121,6 @@ function handlePlaceAddFormSubmit(data) {
   })
     .catch((err) => {
       console.log(err);
-      placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
     })
       .finally(() => {
         setTimeout(() => {placeAddFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
@@ -154,7 +151,6 @@ function handleAvatarChangeFormSubmit(data) {
     })
       .catch((err) => {
         console.log(err);
-        avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")
       })
         .finally(() => {
           setTimeout(() => {avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
