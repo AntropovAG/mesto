@@ -41,8 +41,7 @@ export default class Card {
   }
 
   isLiked() {
-    const cardHasMyLike = this._likes.find(user => user._id === this._myId)
-    return cardHasMyLike
+    return this._likes.find(user => user._id === this._myId)
   }
 
   _setEventListeners() {

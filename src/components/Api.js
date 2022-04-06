@@ -4,82 +4,73 @@ class Api {
     this._userUrl = `${baseUrl}/users/me`;
     this._cardsUrl = `${baseUrl}/cards`;
     this._token = headers['authorization'];
+    this._header = headers
   }
 
-getInitialCards() {
-  return fetch(`${this._baseUrl}/cards`, {
-    headers: {
-      authorization: this._token
-    }
-  })
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._header
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
+
+  postCard({name, link}) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._header,
+      body: JSON.stringify({ name, link })
+    })
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  }
 
-postCard({name, link}) {
-  return fetch(`${this._baseUrl}/cards`, {
-    method: 'POST',
-    headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name, link })
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._header
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
-deleteCard(id) {
-  return fetch(`${this._baseUrl}/cards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._header
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
-getUserInfo() {
-  return fetch(`${this._baseUrl}/users/me`, {
-    headers: {
-      authorization: this._token
-    }
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  editProfile({name, about}) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._header,
+      body: JSON.stringify({ name, about })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
-editProfile({name, about}) {
-  return fetch(`${this._baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name, about })
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  editAvatar({ avatar }) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._header,
+      body: JSON.stringify({ avatar })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
-addLike(id) {
-  return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-    method: 'PUT',
-    headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: this._header
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
-removeLike(id) {
-  return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-    method: 'DELETE',
-    headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-}
+  removeLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: this._header
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+  }
 
 }
 

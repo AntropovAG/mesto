@@ -20,6 +20,11 @@ const profilePlaceSelector = '.popup_type_element-add';
 const popUpElementAdd = document.querySelector(profilePlaceSelector);
 const placeAddForm = popUpElementAdd.querySelector('.form');
 
+//Попап для формы с аватаром
+const avatarFormSelector = '.popup_type_change-photo';
+const avatarChangeForm = document.querySelector(avatarFormSelector);
+
+
 //Переменные со страницы
 const profileEditButton = document.querySelector('.profile__edit-button');
 const elementAddButton = document.querySelector('.profile__add-button');
@@ -39,5 +44,7 @@ export {profileFormSelector,
         templateSelector,
         containerSelector,
         avatarEditButton,
-        cardDeleteFormSelector
+        cardDeleteFormSelector,
+        avatarFormSelector,
+        avatarChangeForm
 }
