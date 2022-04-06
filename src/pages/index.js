@@ -40,13 +40,14 @@ function createCard (cardObject, myId) {
            .then(() =>{
              card.deleteElement();
              cardDeleteFormPopUp.close();
-             setTimeout(() => {cardDeleteFormPopUp.changeButtonTextToDefault('Да')}, 1000)
            })
-           .catch((err) => {
-             console.log(err);
-             cardDeleteFormPopUp.close();
-             cardDeleteFormPopUp.changeButtonTextToDefault('Да')
-            })
+            .catch((err) => {
+              console.log(err);
+              cardDeleteFormPopUp.changeButtonTextToDefault('Да')
+              })
+              .finally(() => {
+                setTimeout(() => {cardDeleteFormPopUp.changeButtonTextToDefault('Да')}, 1000)
+              })
        })
      cardDeleteFormPopUp.open()
   },
@@ -54,9 +55,11 @@ function createCard (cardObject, myId) {
      if(card.isLiked()) {
        api.removeLike(id)
          .then(res => card.setLike(res.likes))
+          .catch(err => console.log(err))
     } else {
        api.addLike(id)
          .then(res => card.setLike(res.likes))
+          .catch(err => console.log(err))
     }
   },
    myId
@@ -66,8 +69,8 @@ function createCard (cardObject, myId) {
   return cardElement;
 }
 
-const section = new Section({items: [], renderer: (item) =>
-  section.addItem(createCard (item))}, containerSelector);
+const section = new Section({items: [], renderer: (item, id) =>
+  section.addItem(createCard (item, id))}, containerSelector);
 
 //Попап с картинкой
 const imagePopUp = new PopupWithImage('.popup_type_view-image');
@@ -87,13 +90,14 @@ function handleProfileEditFormSubmit(data) {
     .then(data => {
       userInfo.setUserInfo({ name: data.name, occupation: data.about });
       profileEditFormPopUp.close();
-      setTimeout(() => {profileEditFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
     })
-    .catch((err) => {
-      console.log(err);
-      profileEditFormPopUp.close();
-      placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
-    })
+      .catch((err) => {
+        console.log(err);
+        placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
+      })
+        .finally(() => {
+          setTimeout(() => {profileEditFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
+        })
 }
 
 const profileEditFormPopUp = new PopupWithForm(profileFormSelector, handleProfileEditFormSubmit)
@@ -116,13 +120,14 @@ function handlePlaceAddFormSubmit(data) {
   .then(data => {
     section.addItem(createCard (data, data.owner._id));
     placeAddFormPopUp.close();
-    setTimeout(() => {placeAddFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
   })
-  .catch((err) => {
-    console.log(err);
-    placeAddFormPopUp.close();
-    placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
-  })
+    .catch((err) => {
+      console.log(err);
+      placeAddFormPopUp.changeButtonTextToDefault("Сохранить")
+    })
+      .finally(() => {
+        setTimeout(() => {placeAddFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
+      })
 }
 
 const placeAddFormPopUp = new PopupWithForm(profilePlaceSelector, handlePlaceAddFormSubmit)
@@ -146,17 +151,18 @@ function handleAvatarChangeFormSubmit(data) {
     .then(data => {
       userInfo.setUserAvatar({ photo: data.avatar });
       avatarChangeFormPopUp.close();
-      setTimeout(() => {avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
     })
-    .catch((err) => {
-      console.log(err);
-      avatarChangeFormPopUp.close();
-      avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")
-    })
+      .catch((err) => {
+        console.log(err);
+        avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")
+      })
+        .finally(() => {
+          setTimeout(() => {avatarChangeFormPopUp.changeButtonTextToDefault("Сохранить")}, 1000)
+        })
 }
 
 function openAvatarChangePopUp() {
-  validatePlaceForm.clearValidationErrorAtOpen();
+  validateAvatarChangeForm.clearValidationErrorAtOpen();
   avatarChangeFormPopUp.open();
 };
 
@@ -178,11 +184,9 @@ validateAvatarChangeForm.enableValidation();
 
 //Обработка промисов при загрузке
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then((results) => {
-    userInfo.setUserInfo({ name: results[0].name, occupation: results[0].about });
-    userInfo.setUserAvatar({photo: results[0].avatar})
-    results[1].forEach((result) => {
-      section.addItem(createCard (result, results[0]._id))
-    })
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({ name: userData.name, occupation: userData.about });
+    userInfo.setUserAvatar({photo: userData.avatar})
+    section.renderItems(cards, userData._id)
   })
   .catch(err => console.log(err))

@@ -23,6 +23,7 @@ export default class Card {
     this._cardText = this._element.querySelector('.element__text');
     this._likeButton = this._element.querySelector('.element__like-button');
     this._deleteButton = this._element.querySelector('.element__delete-icon');
+    this._likeCount = this._element.querySelector('.element__like-counter');
     this._setEventListeners();
 
     this._cardImage.src = this._link;
@@ -52,7 +53,6 @@ export default class Card {
 
   setLike(likes) {
     this._likes = likes
-    this._likeCount = this._element.querySelector('.element__like-counter');
     this._likeCount.textContent = this._likes.length
 
     if(this.isLiked()) {

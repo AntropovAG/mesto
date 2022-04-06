@@ -11,7 +11,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._header
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   postCard({name, link}) {
@@ -20,7 +20,7 @@ class Api {
       headers: this._header,
       body: JSON.stringify({ name, link })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   deleteCard(id) {
@@ -28,14 +28,14 @@ class Api {
       method: 'DELETE',
       headers: this._header
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._header
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   editProfile({name, about}) {
@@ -44,7 +44,7 @@ class Api {
       headers: this._header,
       body: JSON.stringify({ name, about })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   editAvatar({ avatar }) {
@@ -53,7 +53,7 @@ class Api {
       headers: this._header,
       body: JSON.stringify({ avatar })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   addLike(id) {
@@ -61,7 +61,7 @@ class Api {
       method: 'PUT',
       headers: this._header
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
   }
 
   removeLike(id) {
@@ -69,7 +69,11 @@ class Api {
       method: 'DELETE',
       headers: this._header
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
+    .then(this._checkResponse);
+  }
+
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
   }
 
 }
